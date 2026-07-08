@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANTARCTICA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/128/11605/11605946.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="./index.html">
+    <style>
+        /* --- ตั้งค่าพื้นฐาน (Reset & Fonts) --- */
+        :root {
+            --primary-color: #1A331E;
+            /* Deep Forest Green */
+            --accent-color: #396941;
+            /* Luxury Gold/Beige */
+            --bg-cream: #F4F1EA;
+            /* Aesthetic Soft Cream */
+            --text-dark: #2B2B2B;
+            /* Charcoal Black */
+            --text-light: #FFFFFF;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: #333;
+        }
+
+        /* --- ส่วนหัวเว็บ (Header) --- */
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .logo span {
+            color: #f27122; /* สีส้มสัญลักษณ์ของร้าน */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f27122;
+        }
+
+        /* ช่องค้นหา (Search Bar) */
+        .search-container {
+            position: relative;
+            width: 250px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 8px 35px 8px 15px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        /* ตะกร้าสินค้า (Cart Icon) */
+        .cart-icon-container {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background-color: #f27122;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* --- เนื้อหาหลัก (Main Content) --- */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* จัด Layout แบบฝั่งแบนเนอร์ซ้าย และรายการสินค้าขวา */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        /* แบนเนอร์ฝั่งซ้าย (New Arrivals Banner) */
+        .side-banner {
+            /* background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80'); */
+            background-size: cover;
+            background-position: center;
+            background-color: #1A331E;
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border-radius: 4px;
+            min-height: 500px;
+        }
+
+        .side-banner h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .btn-view-more {
+            background-color: #ffffff;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background 0.3s;
+        }
+
+        .btn-view-more:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* ตารางสินค้าฝั่งขวา (Product Grid) */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 10px;
+            height: 36px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-price {
+            color: #000;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* ปุ่ม Add Option / Add to cart */
+        .btn-add-cart {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+            border-radius: 10px;
+        }
+
+        .btn-add-cart:hover {
+            background-color:var(--accent-color);
+            transition: background 0.5s;
+        }
+
+        /* ส่วนแสดงเมื่อไม่พบสินค้า */
+        .no-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: #888;
+            font-size: 16px;
+        }
+
+        .videoloop {
+            width: 100%;
+            height: 60vh;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* --- Responsive สำหรับหน้าจอมือถือ --- */
+        @media (max-width: 768px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .search-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AN <span>TARCTICA</span></div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./index.html">About</a></li>
+                <li><a href="./index.html">Products</a></li>
+                <li><a href="./index.html">Articles</a></li>
+                <li><a href="./index.html">Gallery</a></li>
+            </ul>
+        </nav>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="ค้นหาสินค้าที่นี่..." oninput="filterProducts()">
+        </div>
+
+        <div class="cart-icon-container">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-title-bar">
+            <span>Product</span>
+            <span style="font-size: 13px; cursor: pointer;">ดูเพิ่มเติม ❯</span>
+        </div>
+
+        <div class="content-layout">
+            <div class="side-banner">
+                <video autoplay loop muted class="videoloop">
+                    <source src="https://www.pexels.com/th-th/download/video/29070289/" type="video/mp4">
+                </video>
+                <h2>Product<br>Arrivals</h2>
+                <button class="btn-view-more">ดูทั้งหมด ❯</button>
+            </div>
+
+            <div class="product-grid" id="product-grid">
+                </div>
+        </div>
+    </main>
+
+    <script>
+        // จำลองข้อมูลสินค้าจากรูป Template ของคุณ
+        const products = [
+            {
+                id: 1,
+                name: "ANTARCTICA - ที่ใส่ถุงนอน",
+                price: 80,
+                image: "./image/IMG_20260706_234757.png"
+            },
+            {
+                id: 2,
+                name: "ANTARCTICA - Black Set ถุงนอนปรับอุณหภูมิอัจริยะ",
+                price: 150,
+                image: "./image/backk.jpg"
+            },
+            {
+                id: 3,
+                name: "Solo il Meglio dalle Notizie | StraNotizie.it",
+                price: 100,
+                image: "https://i.pinimg.com/736x/be/eb/a0/beeba0a8dc76a6040d241ee363070034.jpg"
+            },
+            {
+                id: 4,
+                name: "ANTARCTICA - Olive green Set ถุงนอนปรับอุณหภูมิอัจริยะ",
+                price: 150,
+                image: "./image/greens.png"
+            },
+            {
+                id: 5,
+                name: "ANTARCTICA - ถุงนอน",
+                price: 150,
+                image: "https://i.pinimg.com/1200x/12/98/89/1298896d06155088a6eb356a63ea74b7.jpg"
+            },
+            {
+                id: 6,
+                name: "ANTARCTICA - Brown Set ถุงนอนปรับอุณหภูมิอัจริยะ",
+                price: 150,
+                image: "./image/brw.png"
+            }
+        ];
+
+        let cartItemsCount = 0;
+
+        // ฟังก์ชันแสดงรายการสินค้าทั้งหมดลงในหน้าเว็บ
+        function displayProducts(productsToRender) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = ""; // เคลียร์ข้อมูลเก่าก่อน
+
+            if (productsToRender.length === 0) {
+                grid.innerHTML = `<div class="no-products">❌ ไม่พบสินค้าที่คุณกำลังค้นหา</div>`;
+                return;
+            }
+
+            productsToRender.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">$ ${product.price.toLocaleString()}</div>
+                    <button class="btn-add-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // ฟังก์ชันค้นหาสินค้า (Search Filter)
+        function filterProducts() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const filtered = products.filter(product => 
+                product.name.toLowerCase().includes(searchInput)
+            );
+            displayProducts(filtered);
+        }
+
+        // ฟังก์ชันเพิ่มสินค้าในตะกร้า (Add to Cart)
+        function addToCart(productId) {
+            cartItemsCount++;
+            document.getElementById('cart-count').innerText = cartItemsCount;
+            
+            // ค้นหาชื่อสินค้าที่กดสั่งซื้อมาแสดง Alert
+            const product = products.find(p => p.id === productId);
+            alert(`เพิ่ม "${product.name}" ลงในตะกร้าเรียบร้อยแล้ว!`);
+        }
+
+        // สั่งให้โหลดสินค้าทันทีเมื่อเปิดหน้าเว็บ
+        window.onload = () => {
+            displayProducts(products);
+        };
+    </script>
+</body>
+</html>
